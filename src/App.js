@@ -28,17 +28,79 @@
 import React, { Component } from "react";
 import Tabla from "./tabla.js";
 import TablaComponentesSimples from "./tablaComponentessimples";
+import TablaComponentesSimplesProps from "./tablaComponentesSimplesProps"
+import TablaComponentesSimplesState from "./tablaComponentesSimplesState.js"
 
 class App extends Component {
+
+  /** Objeto para utilizar en state */
+  state = {
+    personajes: [
+      {
+        name: "Payton Hobart"
+      },
+      {
+        name: "Wendy Carr"
+      },
+      {
+        name: "Mina"
+      },
+      {
+        name: "Drácula"
+      },
+      {
+        name: "Once"
+      },
+      {
+        name: "Jim Hopper"
+      }
+    ]
+  }
+  /** Método para borrar personajes */
+  borrarPersonaje = indice => {
+    const { personajes } = this.state;
+    this.setState({
+      personajes: personajes.filter((personaje, i) => {
+        return i !== indice;
+        /** Devuelve todas las que no tiene que borar??*/
+      })
+    });
+  }
   render() {
+    /** Colocacion de objetos con nomenclatura json para utilizar con props */
+    const actoresactrices = [
+      {
+        nombre: "Joel",
+        apellidos: "Edgtron"
+      },
+      {
+        nombre: "Carmen",
+        apellidos: "Maura"
+      },
+      {
+        nombre: "Luis",
+        apellidos: "Tosar"
+      },
+      {
+        nombre: "Chloe",
+        apellidos: "Grace Moretz"
+      }
+    ]
+    const { personajes } = this.state
+    /** Para utulizar el state */
+
     return (
       <div className="App">
         <h1>¡Funciona!</h1>
         <h2>Tabla creada mediante un componente de clase que no utiliza componentes simples</h2>
-        
+
         <Tabla />
         <h2>Tabla creada mediante un componente de clase que utiliza componentes simples</h2>
-        <TablaComponentesSimples/>
+        <TablaComponentesSimples />
+        <h2>Tabla creada mediante un componente de clase que utiliza clase de parametros con props</h2>
+        <TablaComponentesSimplesProps datosActoresActrices={actoresactrices} />
+        <h2>Tabla creada mediante componentes simples (con state y que permite borrar elementos), que utiliza dos elementos simples</h2>
+        <TablaComponentesSimplesState datosPersonajes={personajes} borrarPersonaje={this.borrarPersonaje} />
       </div>
 
     );
