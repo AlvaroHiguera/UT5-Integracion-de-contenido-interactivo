@@ -30,32 +30,46 @@ import Tabla from "./tabla.js";
 import TablaComponentesSimples from "./tablaComponentessimples";
 import TablaComponentesSimplesProps from "./tablaComponentesSimplesProps"
 import TablaComponentesSimplesState from "./tablaComponentesSimplesState.js"
+import Formulario from "./formulario.js"
+// import personajes from "./personajes.json";
 
 class App extends Component {
 
   /** Objeto para utilizar en state */
-  state = {
-    personajes: [
-      {
-        name: "Payton Hobart"
-      },
-      {
-        name: "Wendy Carr"
-      },
-      {
-        name: "Mina"
-      },
-      {
-        name: "Drácula"
-      },
-      {
-        name: "Once"
-      },
-      {
-        name: "Jim Hopper"
-      }
-    ]
+  // state = {
+  //   personajes: [
+  //     {
+  //       name: "Payton Hobart"
+  //     },
+  //     {
+  //       name: "Wendy Carr"
+  //     },
+  //     {
+  //       name: "Mina"
+  //     },
+  //     {
+  //       name: "Drácula"
+  //     },
+  //     {
+  //       name: "Once"
+  //     },
+  //     {
+  //       name: "Jim Hopper"
+  //     }
+  //   ]
+  // }
+  /** Utilizo un fichero Json con los datos de los personajes */
+  /**state = { personajes }*/
+
+  /** dojo la coleccion vacia para rellenarla mediante un formulario  */
+  state = { personajes: [] }
+
+  /** Metodo para manejar los datos del formualrio */
+  manejarEnvio = personaje => {
+    this.setState({ personajes: [...this.state.personajes, personaje] });
   }
+
+
   /** Método para borrar personajes */
   borrarPersonaje = indice => {
     const { personajes } = this.state;
@@ -101,6 +115,8 @@ class App extends Component {
         <TablaComponentesSimplesProps datosActoresActrices={actoresactrices} />
         <h2>Tabla creada mediante componentes simples (con state y que permite borrar elementos), que utiliza dos elementos simples</h2>
         <TablaComponentesSimplesState datosPersonajes={personajes} borrarPersonaje={this.borrarPersonaje} />
+        <h2>Añadir nuevo</h2>
+        <Formulario manejarEnvio={this.manejarEnvio} />
       </div>
 
     );
